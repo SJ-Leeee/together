@@ -23,7 +23,7 @@ export class Spaces {
   @Column('boolean', { name: 'private', default: false })
   private: boolean;
 
-  @Column('string', { name: 'password', nullable: true })
+  @Column('text', { name: 'password', nullable: true })
   password: string;
 
   @CreateDateColumn()

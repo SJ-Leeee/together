@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { Users } from './Users';
 import { Spaces } from './Spaces';
-@Entity({ schema: 'together', name: 'spaceInMembers' })
+@Entity({ schema: 'together', name: 'userInSpace' })
 export class UserInSpace {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;

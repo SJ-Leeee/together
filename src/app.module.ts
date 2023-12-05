@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -13,7 +12,6 @@ import { Spaces } from './entities/Spaces';
 
 @Module({
   imports: [
-    AuthModule,
     UserModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
@@ -23,8 +21,8 @@ import { Spaces } from './entities/Spaces';
       username: process.env.MYSQL_USERNAME,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
-      entities: [Chats, Users, Invites, UserInSpace, Spaces, Users],
-      synchronize: true,
+      entities: [Users, Spaces, Chats, Invites, UserInSpace],
+      synchronize: false,
       keepConnectionAlive: true,
       logging: true,
       charset: 'utf8mb4',

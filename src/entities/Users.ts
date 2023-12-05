@@ -10,12 +10,13 @@ import { Spaces } from './Spaces';
 import { Chats } from './Chats';
 import { UserInSpace } from './UserInSpace';
 import { Invites } from './Invites';
+
 @Entity({ schema: 'together', name: 'users' })
 export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
-  @Column('text', { name: 'email', unique: true })
+  @Column('varchar', { name: 'email', length: 255, unique: true })
   email: string;
 
   @Column('text', { name: 'password' })
