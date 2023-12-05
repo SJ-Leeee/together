@@ -2,9 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Spaces } from './Spaces';
+import { Chats } from './Chats';
+import { UserInSpace } from './UserInSpace';
+import { Invites } from './Invites';
 @Entity({ schema: 'together', name: 'users' })
 export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
@@ -34,24 +39,27 @@ export class Users {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  //   @ManyToOne(() => Workspaces, (workspaces) => workspaces.DMs, {
-  //     onDelete: 'SET NULL',
-  //     onUpdate: 'CASCADE',
-  //   })
-  //   @JoinColumn([{ name: 'WorkspaceId', referencedColumnName: 'id' }])
-  //   Workspace: Workspaces;
+  @OneToMany(() => Spaces, (spaces) => spaces.HostId, { cascade: true })
+  Spaces: Spaces[];
+  //  스페이스 외래키 1:N
 
-  //   @ManyToOne(() => Users, (users) => users.DMs, {
-  //     onDelete: 'SET NULL',
-  //     onUpdate: 'CASCADE',
-  //   })
-  //   @JoinColumn([{ name: 'SenderId', referencedColumnName: 'id' }])
-  //   Sender: Users;
+  @OneToMany(() => Chats, (chats) => chats.UserId, { cascade: true })
+  Chats: Chats[];
+  //  채팅 외래키 1:N
 
-  //   @ManyToOne(() => Users, (users) => users.DMs2, {
-  //     onDelete: 'SET NULL',
-  //     onUpdate: 'CASCADE',
-  //   })
-  //   @JoinColumn([{ name: 'ReceiverId', referencedColumnName: 'id' }])
-  //   Receiver: Users;
+  @OneToMany(() => UserInSpace, (UserInSpace) => UserInSpace.UserId, {
+    cascade: true,
+  })
+  UserInSpace: UserInSpace[];
+  //  유저인스페이스 외래키 1:N
+
+  @OneToMany(() => Invites, (Invites) => Invites.HostId, {
+    cascade: true,
+  })
+  HostUserId: Invites[];
+
+  @OneToMany(() => Invites, (Invites) => Invites.TargetId, {
+    cascade: true,
+  })
+  TargetUserId: Invites[];
 }
