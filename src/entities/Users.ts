@@ -31,7 +31,7 @@ export class Users {
   @Column('int', { name: 'age' })
   age: number;
 
-  @Column('text', { name: 'team', nullable: true })
+  @Column('text', { name: 'team', default: 'none' })
   team: string;
 
   @CreateDateColumn()
