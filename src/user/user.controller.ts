@@ -5,7 +5,6 @@ import { UndefinedToNullInterceptor } from 'src/common/interceptor/undefined-to-
 import { Users } from 'src/entities/Users';
 
 // @UseInterceptors(UndefinedToNullInterceptor)
-// @UsePipes(ValidationPipe)
 @Controller('api/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -18,7 +17,7 @@ export class UserController {
   }
 
   @Get()
-  testGet() {
+  async() {
     return this.userService.test();
   }
   // 로그인

@@ -9,10 +9,12 @@ import { Users } from './entities/Users';
 import { Invites } from './entities/Invites';
 import { UserInSpace } from './entities/UserInSpace';
 import { Spaces } from './entities/Spaces';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     UserModule,
+    AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',

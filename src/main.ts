@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './httpException.filter';
+// import * as cookieParser from 'cookie-parser';
 declare const module: any;
 
 async function bootstrap() {
@@ -9,7 +10,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
-
+  // app.use(cookieParser());
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
