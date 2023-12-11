@@ -55,4 +55,12 @@ export class AuthService {
     };
     return { accessToken: this.jwtService.sign(payload) };
   }
+  async tokenValidateUser(payload: Payload): Promise<any> {
+    const user = await this.userRepository.findOne({
+      where: { id: payload.id },
+    });
+
+    const { password, ...result } = user;
+    return result;
+  }
 }

@@ -7,9 +7,11 @@ import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt-strategy';
 import { PassportModule } from '@nestjs/passport';
 import { UserService } from 'src/user/user.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY, // JWT Signature의 Secret 값 입력
       signOptions: { expiresIn: process.env.JWT_EXPIRED }, // JWT 토큰의 만료시간 입력
